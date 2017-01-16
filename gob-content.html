@@ -1,0 +1,87 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+<!--
+`gob-content`
+
+
+@demo demo/index.html
+-->
+
+<dom-module id="gob-content">
+  <template>
+    <style>
+      :host {
+        display: block;
+        margin-top:2rem;
+        margin-bottom:2rem;
+      }
+
+      h4{
+        margin:0;
+        margin-bottom:0.5rem;
+      }
+
+      paper-material{
+        padding:0.5rem;
+        overflow:hidden;
+      }
+
+      paper-material.fixed-height{
+        overflow-y:auto;
+      }
+
+      #spinner{
+        text-align:center;
+      }
+
+      @media(max-width: 480px){
+        paper-material img{
+          width:100% !important;
+        }
+      }
+
+      @media(min-width: 481px){
+      }
+
+      @media(min-width: 800px) {
+      }
+
+    </style>
+    <paper-material style="text-align:[[align]];">
+
+      <template is="dom-if" if="[[title]]">
+        <h4 >[[title]]</h4>
+      </template>
+
+      <div id="spinner" hidden$="{{!loading}}">
+        <paper-spinner active="[[loading]]"></paper-spinner>
+      </div>
+
+      <div style="height:[[height]];overflow-y:[[overflowY]];">
+        <div hidden$="{{loading}}">
+          <content></content>
+        </div>
+      </div>
+    </paper-material>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'gob-content',
+
+      properties:{
+        align:{
+          type:String,
+          value:"center"
+        },
+        loading:{
+          type:Boolean,
+          value:false
+        }
+      }
+
+    });
+  </script>
+</dom-module>
